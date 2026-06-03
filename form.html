@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dg Seva Online - Application Form</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#f8fafc] font-sans antialiased select-none">
+
+    <div class="min-h-screen bg-white max-w-md mx-auto shadow-2xl flex flex-col justify-between pb-6">
+        
+        <!-- Top Nav Navigation -->
+        <header class="bg-white border-b border-slate-100 p-4 sticky top-0 z-10 flex items-center space-x-4">
+            <button onclick="handleBack()" class="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 flex justify-center items-center text-sm cursor-pointer">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 id="form-service-title" class="font-black text-slate-800 text-lg tracking-tight">आवेदन फॉर्म</h2>
+                <p id="form-step-indicator" class="text-[11px] text-blue-600 font-bold">Step 1: Personal & Service Details</p>
+            </div>
+        </header>
+
+        <!-- Main Form Wrapper -->
+        <main class="p-6 flex-1 space-y-6 overflow-y-auto">
+
+            <!-- ================= STEP 1: INFORMATION AREA ================= -->
+            <div id="step-1-container" class="space-y-6">
+                
+                <!-- 1. Universal Personal Details -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-black text-slate-400 tracking-widest uppercase"><i class="fa-solid fa-user-pen mr-1"></i> Personal Details</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">First Name *</label>
+                            <input type="text" id="p-first-name" required placeholder="First Name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Last Name *</label>
+                            <input type="text" id="p-last-name" required placeholder="Last Name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Date of Birth *</label>
+                            <input type="date" id="p-dob" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Gender *</label>
+                            <select id="p-gender" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Mobile No *</label>
+                        <input type="tel" id="p-mobile" maxlength="10" required placeholder="10 Digit Mobile Number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                    </div>
+                </div>
+
+                <!-- 2. Universal Present Address Details -->
+                <div class="space-y-4 pt-2">
+                    <h3 class="text-xs font-black text-slate-400 tracking-widest uppercase"><i class="fa-solid fa-map-location-dot mr-1"></i> Present Address</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Full Address *</label>
+                        <textarea id="p-address" required placeholder="Village/Street/Plot details..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition h-20 resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">State</label>
+                            <input type="text" id="p-state" value="Jharkhand" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-500 focus:outline-none" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">District *</label>
+                            <select id="p-district" required onchange="handleDistrictChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                                <option value="">Select District</option>
+                                <!-- JavaScript will inject all 24 Jharkhand Districts -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Sub Division *</label>
+                            <select id="p-subdivision" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                                <option value="">Select Sub Division</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Post Office *</label>
+                            <input type="text" id="p-po" required placeholder="Post Office" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Police Station *</label>
+                            <input type="text" id="p-ps" required placeholder="Police Station" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Pincode *</label>
+                            <input type="number" id="p-pincode" required placeholder="6-digit PIN" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Location Type *</label>
+                        <select id="p-location-type" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                            <option value="">Select Location Profile</option>
+                            <option value="Rural">Rural</option>
+                            <option value="Municipality">Municipality</option>
+                            <option value="Municipal Corporation">Municipal Corporation</option>
+                            <option value="Notified Area Council">Notified Area Council</option>
+                            <option value="Nagar Panchayat">Nagar Panchayat</option>
+                            <option value="Cantonment Board">Cantonment Board</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 3. Dynamic Section: INCOME DETAILS (Only for Income Cert) -->
+                <div id="income-spec-section" class="hidden space-y-4 pt-2 border-t border-slate-100">
+                    <h3 class="text-xs font-black text-amber-600 tracking-widest uppercase"><i class="fa-solid fa-[#1e3a8a] mr-1"></i> Income Details</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1.5">Farming Income (Rs) *</label>
+                            <input type="number" id="inc-farming" value="0" oninput="calculateTotalIncome()" class="inc-calc w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1.5">Occupation Income (Rs) *</label>
+                            <input type="number" id="inc-occupation" value="0" oninput="calculateTotalIncome()" class="inc-calc w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1.5">Business Income (Rs) *</label>
+                            <input type="number" id="inc-business" value="0" oninput="calculateTotalIncome()" class="inc-calc w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1.5">House Rent Income (Rs) *</label>
+                            <input type="number" id="inc-rent" value="0" oninput="calculateTotalIncome()" class="inc-calc w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1.5">Other Sources Income (Rs) *</label>
+                        <input type="number" id="inc-other" value="0" oninput="calculateTotalIncome()" class="inc-calc w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-black text-emerald-700 mb-1.5">Total Annual Income (In Rs.)</label>
+                        <input type="text" id="inc-total" value="0" class="w-full bg-emerald-50 border border-emerald-200 font-extrabold text-emerald-700 rounded-xl px-4 py-3 text-base focus:outline-none" readonly>
+                    </div>
+                </div>
+
+                <!-- 4. Dynamic Section: CASTE DETAILS (Only for Caste Cert) -->
+                <div id="caste-spec-section" class="hidden space-y-4 pt-2 border-t border-slate-100">
+                    <h3 class="text-xs font-black text-blue-600 tracking-widest uppercase"><i class="fa-solid fa-people-group mr-1"></i> Caste Details</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Category *</label>
+                        <select id="caste-category" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                            <option value="">Select Category</option>
+                            <option value="ST">ST (Scheduled Tribe)</option>
+                            <option value="SC">SC (Scheduled Caste)</option>
+                            <option value="BC1">BC-I (OBC Anniversary 1)</option>
+                            <option value="BC2">BC-II (OBC Anniversary 2)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Caste Name *</label>
+                        <select id="caste-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition">
+                            <option value="">Select Caste Name</option>
+                            <option value="Santhal">Santhal</option>
+                            <option value="Oraon">Oraon</option>
+                            <option value="Munda">Munda</option>
+                            <option value="Ho">Ho</option>
+                            <option value="Mahto">Mahto / Kudmi</option>
+                            <option value="Teli">Teli</option>
+                            <option value="Chamar">Chamar</option>
+                            <option value="Paswan">Paswan</option>
+                            <option value="Rajput">Rajput</option>
+                            <option value="Brahmin">Brahmin</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= STEP 2: DOCUMENT UPLOAD AREA ================= -->
+            <div id="step-2-container" class="hidden space-y-5 animate-[fadeIn_0.4s_ease-in-out]">
+                <h3 class="text-xs font-black text-slate-400 tracking-widest uppercase"><i class="fa-solid fa-file-arrow-up mr-1"></i> Required Documents</h3>
+                
+                <!-- Aadhaar Row -->
+                <div class="border border-slate-200 bg-slate-50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex justify-center items-center text-sm"><i class="fa-solid fa-address-card"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Aadhaar Card *</p>
+                            <p class="text-[10px] text-slate-400">Identity / Address document</p>
+                        </div>
+                    </div>
+                    <label class="text-xs bg-white border border-slate-300 font-bold px-3 py-2 rounded-lg视觉 shadow-sm cursor-pointer hover:bg-slate-50 transition active:scale-95">
+                        Select <input type="file" accept="image/*,application/pdf" class="hidden file-input-element">
+                    </label>
+                </div>
+
+                <!-- Khatiyan Row -->
+                <div class="border border-slate-200 bg-slate-50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex justify-center items-center text-sm"><i class="fa-solid fa-scroll"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Khatiyan *</p>
+                            <p class="text-[10px] text-slate-400">Land record proof</p>
+                        </div>
+                    </div>
+                    <label class="text-xs bg-white border border-slate-300 font-bold px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-slate-50 transition active:scale-95">
+                        Select <input type="file" accept="image/*,application/pdf" class="hidden file-input-element">
+                    </label>
+                </div>
+
+                <!-- Khajana Rasid Row -->
+                <div class="border border-slate-200 bg-slate-50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-purple-100 text-purple-600 flex justify-center items-center text-sm"><i class="fa-solid fa-receipt"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Khajana Rasid *</p>
+                            <p class="text-[10px] text-slate-400">Latest Land Rent Receipt</p>
+                        </div>
+                    </div>
+                    <label class="text-xs bg-white border border-slate-300 font-bold px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-slate-50 transition active:scale-95">
+                        Select <input type="file" accept="image/*,application/pdf" class="hidden file-input-element">
+                    </label>
+                </div>
+
+                <!-- Swaghosna Patra Row -->
+                <div class="border border-slate-200 bg-slate-50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-600 flex justify-center items-center text-sm"><i class="fa-solid fa-file-signature"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Swaghosna Patra *</p>
+                            <p class="text-[10px] text-blue-500 font-semibold underline cursor-pointer">Format Download</p>
+                        </div>
+                    </div>
+                    <label class="text-xs bg-white border border-slate-300 font-bold px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-slate-50 transition active:scale-95">
+                        Select <input type="file" accept="image/*,application/pdf" class="hidden file-input-element">
+                    </label>
+                </div>
+
+                <!-- Other Documents Row -->
+                <div class="border border-slate-200 bg-slate-50 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-lg bg-slate-200 text-slate-600 flex justify-center items-center text-sm"><i class="fa-solid fa-folder-plus"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Other Document</p>
+                            <p class="text-[10px] text-slate-400">Koi anya dastawez (Optional)</p>
+                        </div>
+                    </div>
+                    <label class="text-xs bg-white border border-slate-300 font-bold px-3 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-slate-50 transition active:scale-95">
+                        Select <input type="file" accept="image/*,application/pdf" class="hidden file-input-element">
+                    </label>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Dynamic Sticky Control Footer Button -->
+        <footer class="px-6 mt-4">
+            <button id="form-action-btn" onclick="handleFooterAction()" class="w-full bg-[#1e3a8a] hover:bg-[#152a66] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-900/10 transition active:scale-[0.98] cursor-pointer text-sm">
+                Next: Upload Documents
+            </button>
+        </footer>
+    </div>
+
+    <!-- SYSTEM DATABASE & CORE LOGIC SCRIPT -->
+    <script>
+        let currentStep = 1;
+        let globalServiceType = "";
+
+        // Jharkhand 24 Districts Matrix Array Mapping
+        const jharkhandDistricts = [
+            "Bokaro", "Chatra", "Deoghar", "Dhanbad", "Dumka", "East Singhbhum", 
+            "Garhwa", "Giridih", "Godda", "Gumla", "Hazaribagh", "Jamtara", 
+            "Khunti", "Koderma", "Latehar", "Lohardaga", "Pakur", "Palamu", 
+            "Ramgarh", "Ranchi", "Sahibganj", "Seraikela Kharsawan", "Simdega", "West Singhbhum"
+        ];
+
+        // Sample Subdivisions Map mock setup
+        const subdivisionMockData = {
+            "West Singhbhum": ["Chaibasa", "Chakradharpur", "Jagannathpur"],
+            "Ranchi": ["Ranchi Sadar", "Bundu"],
+            "Dhanbad": ["Dhanbad Sadar"],
+            "East Singhbhum": ["Ghatshila", "Dhalbhum"]
+        };
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            globalServiceType = urlParams.get('service');
+            
+            const titleElement = document.getElementById('form-service-title');
+            const distSelect = document.getElementById('p-district');
+
+            // 1. Service Type Architecture Layout Filtering
+            if (globalServiceType === 'Caste_Certificate') {
+                titleElement.innerText = "जाति प्रमाण पत्र आवेदन";
+                document.getElementById('caste-spec-section').classList.remove('hidden');
+            } else if (globalServiceType === 'Residential_Certificate') {
+                titleElement.innerText = "आवासीय प्रमाण पत्र आवेदन";
+            } else if (globalServiceType === 'Income_Certificate') {
+                titleElement.innerText = "आय प्रमाण पत्र आवेदन";
+                document.getElementById('income-spec-section').classList.remove('hidden');
+            }
+
+            // 2. Inject Jharkhand Districts seamlessly inside dropdown
+            jharkhandDistricts.forEach(dist => {
+                let opt = document.createElement('option');
+                opt.value = dist;
+                opt.innerText = dist;
+                distSelect.appendChild(opt);
+            });
+        }
+
+        // Sub Division Trigger mapping based on district input field click
+        function handleDistrictChange() {
+            const distVal = document.getElementById('p-district').value;
+            const subDivSelect = document.getElementById('p-subdivision');
+            
+            // Clear current options
+            subDivSelect.innerHTML = '<option value="">Select Sub Division</option>';
+            
+            if(subdivisionMockData[distVal]) {
+                subdivisionMockData[distVal].forEach(sub => {
+                    let opt = document.createElement('option');
+                    opt.value = sub;
+                    opt.innerText = sub;
+                    subDivSelect.appendChild(opt);
+                });
+            } else {
+                // Fallback option if dynamic mock array isn't declared
+                let opt = document.createElement('option');
+                opt.value = distVal + " Sadar";
+                opt.innerText = distVal + " Sadar";
+                subDivSelect.appendChild(opt);
+            }
+        }
+
+        // Auto Income Calculation Logic Machine
+        function calculateTotalIncome() {
+            let total = 0;
+            document.querySelectorAll('.inc-calc').forEach(input => {
+                let val = parseFloat(input.value);
+                if(!isNaN(val)) {
+                    total += val;
+                }
+            });
+            document.getElementById('inc-total').value = "₹ " + total.toLocaleString('en-IN');
+        }
+
+        // Wizard Control flow management hook
+        function handleFooterAction() {
+            const step1 = document.getElementById('step-1-container');
+            const step2 = document.getElementById('step-2-container');
+            const btn = document.getElementById('form-action-btn');
+            const indicator = document.getElementById('form-step-indicator');
+
+            if (currentStep === 1) {
+                // Shift workflow to Step 2 layer
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                indicator.innerText = "Step 2: Document Verification Area";
+                btn.innerText = "Proceed to Secure Payment (₹80)";
+                btn.className = "w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition text-sm cursor-pointer";
+                currentStep = 2;
+            } else if (currentStep === 2) {
+                // Triggers final checkout logic simulation
+                alert("Form details aur Cloudinary integration check pipeline ready! Proceeding to Payment Gateway configuration...");
+                window.location.href = 'dashboard.html';
+            }
+        }
+
+        // Top navigation structural handle
+        function handleBack() {
+            if (currentStep === 2) {
+                const step1 = document.getElementById('step-1-container');
+                const step2 = document.getElementById('step-2-container');
+                const btn = document.getElementById('form-action-btn');
+                const indicator = document.getElementById('form-step-indicator');
+
+                step2.classList.add('hidden');
+                step1.classList.remove('hidden');
+                indicator.innerText = "Step 1: Personal & Service Details";
+                btn.innerText = "Next: Upload Documents";
+                btn.className = "w-full bg-[#1e3a8a] hover:bg-[#152a66] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition text-sm cursor-pointer";
+                currentStep = 1;
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        }
+
+        // File Selection Check Visual Feedback Handler Loop
+        document.querySelectorAll('.file-input-element').forEach(input => {
+            input.addEventListener('change', function() {
+                if(this.files.length > 0) {
+                    let label = this.closest('label');
+                    label.innerText = "Selected ✔️";
+                    label.className = "text-xs bg-emerald-50 border border-emerald-300 text-emerald-600 font-bold px-3 py-2 rounded-lg transition shadow-inner";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dg Seva Online - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#f8fafc] font-sans antialiased select-none">
+
+    <div class="min-h-screen max-w-md mx-auto shadow-2xl flex flex-col justify-between pb-6 bg-white">
+        <!-- Top Curve Header -->
+        <header class="bg-gradient-to-r from-[#1e3a8a] to-[#0f172a] p-6 rounded-b-[2rem] shadow-lg text-white">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white/10 rounded-full flex justify-center items-center backdrop-blur-md border border-white/20">
+                        <i class="fa-solid fa-user text-emerald-400"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-300">Welcome back,</p>
+                        <h3 id="user-profile-name" class="font-bold tracking-wide">User</h3>
+                    </div>
+                </div>
+                <button onclick="logout()" class="text-xs bg-red-500/20 hover:bg-red-500/40 text-red-300 font-bold px-3 py-2 rounded-xl transition border border-red-500/30 cursor-pointer">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            </div>
+            <div class="mt-6 bg-white/5 border border-white/10 rounded-xl p-3 flex items-center space-x-3 backdrop-blur-sm">
+                <i class="fa-solid fa-bolt-lightning text-amber-400 text-lg"></i>
+                <p class="text-xs text-slate-200 leading-snug">Ab Pragya Kendra ki lambi line chodo! Ghar baite 5 minute me aavedan karein.</p>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="p-6 flex-1 space-y-6 overflow-y-auto">
+            <div>
+                <h4 class="text-xs font-black text-slate-400 tracking-widest mb-3 uppercase">Praman Patra Sewayein</h4>
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Caste -->
+                    <div onclick="openServiceForm('Caste_Certificate')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-blue-300 transition duration-200 cursor-pointer active:scale-[0.99]">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex justify-center items-center text-xl">📜</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">जाति प्रमाण पत्र</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Caste Certificate Apply</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg flex items-center gap-1">Apply <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                    <!-- Residential -->
+                    <div onclick="openServiceForm('Residential_Certificate')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-emerald-300 transition duration-200 cursor-pointer active:scale-[0.99]">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex justify-center items-center text-xl">🏠</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">आवासीय प्रमाण पत्र</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Residential Certificate</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-lg flex items-center gap-1">Apply <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                    <!-- Income -->
+                    <div onclick="openServiceForm('Income_Certificate')" class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between hover:border-amber-300 transition duration-200 cursor-pointer active:scale-[0.99]">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex justify-center items-center text-xl">💰</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">आय प्रमाण पत्र</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Income Certificate Apply</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-amber-50 text-amber-600 px-3 py-1.5 rounded-lg flex items-center gap-1">Apply <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Stepper Tracking -->
+            <div>
+                <h4 class="text-xs font-black text-slate-400 tracking-widest mb-3 uppercase">Aapka Aavedan Status</h4>
+                <div id="no-orders-box" class="bg-dashed border-2 border-slate-200 rounded-2xl p-6 text-center text-slate-400">
+                    <i class="fa-solid fa-folder-open text-2xl mb-2 text-slate-300"></i>
+                    <p class="text-xs font-medium">Abhi tak koi aavedan nahi kiya gaya hai.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Help Widget -->
+        <footer class="px-6">
+            <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba56] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-lg transition cursor-pointer">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span class="text-sm">Direct Support (WhatsApp Chat)</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        window.onload = function() {
+            let user = localStorage.getItem('dgUser');
+            if(!user) {
+                window.location.href = 'splash.html';
+            } else {
+                document.getElementById('user-profile-name').innerText = user;
+            }
+        }
+
+        function openServiceForm(service) {
+            window.location.href = `form.html?service=${service}`;
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'splash.html';
+        }
+    </script>
+</body>
+</html>
